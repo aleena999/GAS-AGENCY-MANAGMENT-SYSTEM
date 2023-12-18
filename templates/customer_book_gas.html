@@ -1,0 +1,29 @@
+{% extends 'customer_index.html' %}
+{% block body %}
+<body>
+	<form method="post">
+		<table align="center" class="table">
+			<h1 align="center">CYLINDER BOOKING DETAILS</h1>
+			<tr>
+				<th>Name</th>
+				<td>{{data['profile'][0]['cus_fname']}}{{data['profile'][0]['cus_lname']}}</td>
+			</tr>
+			<tr>
+				<th>Cylinder Weight</th>
+				<td>{{data['profile'][0]['cat_weight']}}</td>
+			</tr>
+			<tr>
+				<th>Price(Rs.)</th>
+				<td>{{data['profile'][0]['price']}}</td>
+			</tr>
+			
+			{% if data['profile'][0]['cylin_inhand']<='1' %}
+			<tr>
+				<td align="center" colspan="2"><input type="submit" name="submit" value="BOOK NOW"></td>
+			</tr>
+			{% endif %}
+		</table>
+	</form>
+
+</body>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'admin_index.html' %}
+{% block body %}
+<body>
+	<left>
+		<form method="post">
+			<h1 align="center">CUSTOMERS</h1>
+		<table class="table" align="left">
+			<tr>
+				<th>Name</th>
+				<!-- <th>Username</th> -->
+				<th>Address</th>
+				<th>Phone</th>
+				<th>Proof Of Address</th>
+				<th>Proof of Identity</th>
+				<th>Adhaar Number</th>
+				<th>Cylinder Category</th>
+				<th>Connection Type</th>
+				<th>Installation Status</th>
+				
+
+			</tr>
+			{% for row in data['users'] %}
+				<tr>
+					<td>{{row['cus_fname']}}  {{row['cus_lname']}}</td>
+					<!-- <td>{{row['username']}}</td> -->
+					<td>{{row['cus_hname']}}, {{row['cus_city']}}, {{row['cus_district']}}, {{row['cus_state']}}, {{row['pincode']}}</td>
+					<td>{{row['cus_phno']}}</td>
+					<td><img src="/{{row['proof_of_address']}}" width="100" height="100"></td>
+					<td><img src="/{{row['proof_of_identity']}}" width="100" height="100"></td>
+					<td>{{row['adhaar_no']}}</td>
+					<td>{{row['cat_weight']}}</td>
+					<td>{{row['connection_type']}}</td>		
+					<td>{{row['install_status']}}</td>
+					{% if row ['install_status']=='pending' %}
+					<td><a href="?action=install&id={{row['customer_id']}}" class="btn btn-info">Installed</td>		
+					{% endif %}
+				
+				</tr>
+			{% endfor %}
+		</table>
+		</form>
+</left>
+
+</body>
+{% endblock %}

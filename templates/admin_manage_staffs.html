@@ -1,0 +1,148 @@
+{% extends 'admin_index.html' %}
+{% block body %}
+<body>
+	<form method="post">
+		<center>
+		{% if data['updater'] %}
+		<table align="center" class="table" style="width: 500px;box-shadow: inset 0 0 0 200px rgba(0,0,0,0.5)">
+			<h1 align="center">UPDATE</h1>
+			<tr>
+				<th>Name</th>
+				<td>{{data['updater'][0]['staff_fname']}} {{data['updater'][0]['staff_lname']}}</td>
+			</tr>
+			<tr>
+				<th>House Name</th>
+				<td><input type="text" name="hname" class="form-control" value="{{data['updater'][0]['staff_hname']}}" "></td>
+			</tr>
+			</tr>
+				<tr>
+				<th>City</th>
+				<td><input type="text" name="city" class="form-control" value="{{data['updater'][0]['staff_city']}}"></td>
+			</tr>
+
+			<tr>
+				<th>District</th>
+				<td><input type="text" name="district" class="form-control" value="{{data['updater'][0]['staff_district']}}"></td>
+			</tr>
+			<tr>
+				<th>State</th>
+				<td><input type="text" name="state" class="form-control" value="{{data['updater'][0]['staff_state']}}"></td>
+			</tr>
+			<tr>
+				<th>Pincode</th>
+				<td><input type="text" name="pincode" class="form-control" value="{{data['updater'][0]['staff_pincode']}}"></td>
+			</tr>
+		
+			<tr>
+				<th>Phone</th>
+				<td><input type="number" name="phone" class="form-control" value="{{data['updater'][0]['staff_phno']}}"></td>
+			</tr>
+				<tr>
+				<th>Designation</th>
+				<td><input type="text" name="description" class="form-control" value="{{data['updater'][0]['staff_des']}}"></td>
+			</tr>
+
+			
+		
+			<tr>
+				<td colspan="2" align="center"><input type="submit" name="update" value="update" class="btn btn-success"></td>
+			</tr>
+			
+		</table >
+
+		{% else %}
+		<table align="center" class="table" style="width: 500px;box-shadow: inset 0 0 0 200px rgba(0,0,0,0.5">
+			<h1 align="center">NEW STAFF</h1>
+			<tr>
+				<th>First Name</th>
+				<td><input type="text" name="fname" class="form-control" title="Must contain only alphabets" required=""></td>
+			</tr>
+			<tr>
+				<th>Last Name</th>
+				<td><input type="text" name="lname" class="form-control" required=""></td>
+			</tr>
+			<tr>
+				<th>House Name</th>
+				<td><input type="text" name="hname" class="form-control" required=""></td>
+			</tr>
+			</tr>
+				<tr>
+				<th>City</th>
+				<td><input type="text" name="city" class="form-control" required=""></td>
+			</tr>
+
+			<tr>
+				<th>District</th>
+				<td><input type="text" name="district" class="form-control" required=""></td>
+			</tr>
+			<tr>
+				<th>State</th>
+				<td><input type="text" name="state" class="form-control" required=""></td>
+			</tr>
+			<tr>
+				<th>Pincode</th>
+				<td><input type="text" name="pincode" class="form-control" maxlength="6" required=""></td>
+			</tr>
+				<tr>
+				<th>DOB</th>
+				<td><input type="date" name="dob" class="form-control" required=""></td>
+			</tr>
+			<tr>
+				<th>Phone</th>
+				<td><input type="number" name="phone" maxlength="10" class="form-control" required=""></td>
+			</tr>
+			<tr>
+				<th>Designation</th>
+				<td><input type="text" name="description" class="form-control" required=""></td>
+			</tr>
+				<tr>
+				<th>Email</th>
+				<td><input type="email" name="email" class="form-control" required=""></td>
+			</tr>
+			
+			<tr>
+				<th>Password</th>
+				<td><input type="password" name="password" class="form-control"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 6 or more characters"></td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center"><input type="submit" name="submit" value="Submit" class="btn btn-success"></td>
+			</tr>
+		</table>
+		{% endif %}
+		<table align="center" class="table" style="width: 1250px;box-shadow: inset 0 0 0 200px rgba(0,0,0,0.5">
+			<h1 align="center">STAFF</h1>
+			<tr>
+				<th>Name</th>
+				<th>Username</th>
+				<th>Address</th>
+				<th>Dob</th>
+				<th>Designation</th>
+				<th>Date Of Joining</th>
+				<th>Phone</th>
+				
+			</tr>
+			{% for row in data['staffs'] %}
+			<tr>
+				<td style="width: 130px;">{{row['staff_fname']}} {{row['staff_lname']}}</td>
+				<td>{{row['username']}}</td>	
+				<td>{{row['staff_hname']}}, {{row['staff_city']}}, {{row['staff_district']}}, {{row['staff_state']}}, {{row['staff_pincode']}}</td>
+				<td style="width: 110px;">{{row['staff_dob']}}</td>	
+				<td>{{row['staff_des']}}</td>
+				<td style="width: 180px;">{{row['staff_doj']}}</td>
+				
+			
+				<td>{{row['staff_phno']}}</td>
+				
+				<td><a href="?action=delete&id={{row['staff_id']}}" class="btn btn-danger">Remove</a></td>
+				<td><a href="?action=update&id={{row['staff_id']}}" class="btn btn-info">Update</a></td>
+			</tr>
+			{% endfor %}
+			
+		</table>
+	</center>
+		
+	</form>
+
+
+</body>
+{% endblock %}

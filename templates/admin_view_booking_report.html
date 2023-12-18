@@ -1,0 +1,37 @@
+{% extends 'admin_index.html' %}
+{% block body %}
+<body>
+	<form method="post">
+		<h1 align="center">GAS BOOKING REPORT</h1>
+		<table align="center" class="table" style="box-shadow: inset 0 0 0 200px rgba(0,0,0,0.5)">
+			<tr>
+				<th>Sl No.</th>
+				<th>Customer Name</th>
+				<th>Connection Type</th>
+				<th>Cylinder Category</th>
+				<th>Price</th>
+				<!-- <th>Cylinder in Hand</th> -->
+				<th>Booked Date</th>
+				<th>Delivered Vehicle</th>
+				<!-- <th>Driver</th> -->
+				<th>Delivery Date</th>
+			</tr>
+			{% for row in data['booking_report'] %}
+			<tr>
+				<td>{{ loop.index }}</td>
+				<td>{{row['cus_fname']}} {{row['cus_lname']}}</td>
+				<td>{{row['connection_type']}}</td>
+				<td>{{row['cat_weight']}}</td>
+				<td>{{row['price']}}</td>
+				<!-- <td>{{row['cylin_inhand']}}</td> -->
+				<td>{{row['date']}}</td>
+				<td>{{row['vehicle_regno']}}</td>
+				<!-- <td>{{row['driver']}}</td> -->
+				<td>{{row['delivery_date']}}</td>
+			</tr>
+			{% endfor %}
+		</table>
+	</form>
+
+</body>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'admin_index.html' %}
+{% block body %}
+<body>
+
+	<form method="post">
+		<table align="center" class="table" style="width: 500px;">
+			<h1 align="center">Complaints</h1>
+			<tr>
+				<th>Name</th>
+				
+				<th>Phone</th>
+				
+				<th>Complaint</th>
+				<th>Reply</th>
+				<th>Date</th>
+
+			</tr>
+			{% for row in data['complaints'] %}
+			<tr>
+				<td>{{row['cus_fname']}}{{row['cus_lname']}}</td>
+				
+				<td>{{row['cus_phno']}}</td>
+				<td>{{row['complaint']}}</td>
+				<td>{{row['reply']}}</td>
+				<td>{{row['date_time']}}</td>
+				{% if row['reply']=='pending' %}
+				<td><a href="?action=reply&id={{row['complaint_id']}}" class="btn btn-info">reply</a></td>
+				{% endif %}
+
+			</tr>
+			{% endfor %}
+			
+		</table>
+	</form>
+</body>
+{% endblock %}

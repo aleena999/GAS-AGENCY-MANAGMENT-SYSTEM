@@ -1,0 +1,69 @@
+
+{% include 'admin_header.html' %}
+{% include 'sub_header.html' %}
+<center>
+	<form method="post"><br>
+		{% if data['view'] %}
+<div id="div_print" >
+	<h1>Customer Order Details Report</h1><br>
+	<table class=table style="width:500px !important;">
+		<tr>
+			<th>Sl.No</th>
+			<th>Product Name</th>
+			<th>Quantity</th>
+			<th>Price</th>
+			<th>Paid on</th>
+		</tr>
+		{% for row in data['view'] %}
+		<tr>
+			<td>{{ loop.index }}</td>
+			<td>{{ row['product_name'] }}</td>
+			<td>{{ row['oq'] }}</td>
+			<td>{{ row['a'] }}</td>
+			<td>{{ row['date'] }}</td>
+		</tr>
+		{% endfor %}
+	</table>
+</div>
+<br>
+<a class="btn btn-success" onclick="printDiv()" href="?">click to print</a><br>
+{% else %}
+<br><br><br>
+<h2>ORDER REPORT</h2><br>
+<div class="jumbotron" style="width:600px">
+<h3>Generate Report</h3><br>
+<table>
+	<tr>
+		<th>From Date : </th>
+		<td><input type="date" required="" class="form-control" name="d1"></td>
+	</tr>
+	<tr><td><br></td></tr>
+	<tr>
+		<th>To Date : </th>
+		<td><input type="date" required="" class="form-control" name="d2"></td>
+	</tr>
+	<tr><td><br></td></tr>
+	<tr>
+		<td colspan="2" align="center">
+<input class="btn btn-success" type="submit" name="submit" value="Show Details"></td>
+	</tr>
+</table>
+<br><br>
+</div>
+<br><br>
+{% endif %}</form>
+</center>
+
+{% include 'sub_footer.html' %}
+{% include 'footer.html' %}
+
+<!-- Script to print the content of a div -->
+	<script> 
+		function printDiv() { 
+			var divContents = document.getElementById("div_print").innerHTML; 
+			var a = window.open('', '', 'height=500, width=500'); 
+			a.document.write(divContents); 
+			a.document.close(); 
+			a.print(); 
+		} 
+	</script> 

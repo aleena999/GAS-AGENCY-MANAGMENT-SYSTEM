@@ -1,0 +1,33 @@
+{% extends 'customer_index.html' %}
+{% block body %}
+<body>
+	<form method="post">
+		<table align="center" class="table" style="width: 500px;">
+			<h1 align="center">Send Complaint</h1>
+		<tr>
+			<th>Complaint</th>
+			<td><textarea name="complaint" class="form-control" required=""></textarea></td>
+		</tr>
+		<tr>
+			<td colspan="2" align="center"><input type="submit" name="submit"></td>
+		</tr>
+		</table>
+		<table align="center" class="table" align="center">
+			<h1 align="center">Complaints</h1>
+			<tr>
+				<th>Complaint</th>
+				<th>Date</th>
+				<th>Reply</th>
+			</tr>
+			{% for row in data['complaints'] %}
+			<tr>
+				<td>{{row['complaint']}}</td>
+				<td>{{row['date_time']}}</td>
+				<td>{{row['reply']}}</td>
+			</tr>
+			{% endfor %}
+		</table>
+	</form>
+
+</body>
+{% endblock %}

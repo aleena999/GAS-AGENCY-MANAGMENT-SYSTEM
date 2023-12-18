@@ -1,0 +1,65 @@
+{% extends 'staff_index.html' %}
+{% block body %}
+<body>
+	<form method="post">
+		{% if data['updater'] %}
+		<table align="center" class="table" style="width: 500px;">
+			<h1 align="center">UPDATE VEHICLE DETAILS</h1>
+			<tr>
+				<th>Registration No</th>
+				<td>{{data['updater'][0]['vehicle_regno']}}</td>
+			</tr>
+			<tr>
+				<th>Vehicle Type</th>
+				<td>{{data['updater'][0]['vehicle_type']}}</td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center"><input type="submit" name="update" value="update" class="btn btn-info"></td>
+			</tr>
+		</table>
+		{% else %}
+		
+
+		
+		<table align="center" class="table" style="width: 500px;">
+			<h1 align="center">NEW VEHICLE DETAILS</h1>
+			<tr>
+				<th>Vehicle Reg No</th>
+				<td><input type="text" name="reg_no" class="form-control" required=""></td>
+			</tr>
+			<tr>
+			
+			<th>Vehicle Type</th>
+				<td><input type="text" name="vehicle_type" class="form-control" required=""></td>
+			</tr>
+			
+			<tr>
+				<td colspan="2" align="center"><input type="submit" name="submit" value="Submit" class="btn btn-success"></td>
+			</tr>
+		</table>
+		{% endif %}
+		
+		<table align="center" class="table" style="width: 500px;">
+			<h1 align="center">VEHICLES</h1>
+			<tr>
+				<th>Registration No</th>
+				<th>Vehicle Type</th>
+				<th>Vehicle Status</th>
+				
+			</tr>
+			{% for row in data['vehicle'] %}
+			<tr>
+				<td>{{row['vehicle_regno']}}</td>
+				<td>{{row['vehicle_type']}}</td>
+				<td>{{row['vehicle_status']}}</td>
+				
+				<td><a href="?action=delete&id={{row['vehicle_regno']}}" class="btn btn-danger">Delete</a></td>
+				
+			{% endfor %}
+			
+		</table>
+		
+	</form>
+
+</body>
+{% endblock %}

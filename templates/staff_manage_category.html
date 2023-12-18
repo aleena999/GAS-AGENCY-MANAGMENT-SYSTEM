@@ -1,0 +1,105 @@
+{% extends 'staff_index.html' %}
+{% block body %}
+<body>
+	<form method="post">
+		{% if data['stock'] %}
+		<table align="center" class="table">
+			<h1 align="center">UPDATE STOCK</h1>
+			<tr>
+				<th>Category</th>
+				<td>{{data['stock'][0]['cat_weight']}}</td>
+			</tr>
+			<tr>
+				<th>Stock Type</th>
+				<td><select name="stock_type">
+						<option value="Full">Full</option>
+					<option value="Empty">Empty</option>
+					<option value="Damaged">Damaged</option>
+				</select></td>
+			</tr>
+			<tr>
+				<th>No Of Cylinder</th>
+				<td><input type="number" name="stock" class="form-control" required=""></td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center"><input type="submit" name="stock" class="btn btn-success"></td>
+			</tr>
+		</table>
+		<table align="center" class="table">
+		<h1 align="center">Stock </h1>
+			<h5 align="right"> {{ data['total']}}</h5>
+	<tr>
+				<th>Stock Type</th>
+				<th>Stock Date</th>
+				<th>No of Cylinders</th>
+			</tr>
+			{% for row in data['stocks'] %}
+			<tr>
+				<td>{{row['stock_type']}}</td>
+				<td>{{row['stock_date']}}</td>
+				<td>{{row['no_of_cylin']}}</td>
+			</tr>
+			{% endfor %}
+		</table>
+		{% else %}
+		{% if data['updater'] %}
+		<table align="center" class="table" style="width: 500px;">
+			<h1 align="center">UPDATE CYLINDER CATEGORY DETAILS</h1>
+			<tr>
+				<th>Category Weight</th>
+				<td>{{data['updater'][0]['cat_weight']}}</td>
+			</tr>
+			<tr>
+				<th>Price(Rs.)</th>
+				<td><input type="text" name="price" value="{{data['updater'][0]['price']}}"></td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center"><input type="submit" name="update" value="Update" class="btn btn-info"></td>
+			</tr>
+		</table>
+		{% else %}
+		
+
+		
+		<table align="center" class="table" style="width: 500px;">
+			<h1 align="center">NEW CYLINDER CATEGORY</h1>
+			<tr>
+				<th>Category Weight</th>
+				<td><input type="text" name="category" class="form-control" required=""></td>
+			</tr>
+			<tr>
+			<th>Price (Rs.)</th>
+				<td><input type="number" name="price" class="form-control" required=""></td>
+			</tr>
+			
+			<tr>
+				<td colspan="2" align="center"><input type="submit" name="submit" value="Submit" class="btn btn-success"></td>
+			</tr>
+		</table>
+		{% endif %}
+		
+		<table align="center" class="table" style="width: 500px;">
+			<h1 align="center">CYLINDER CATEGORY</h1>
+			<tr>
+				<th>Category Wieght</th>
+				<th>Price(Rs.)</th>
+				
+			</tr>
+			{% for row in data['category'] %}
+			<tr>
+				<td>{{row['cat_weight']}}</td>
+				<td>{{row['price']}}</td>
+				
+				<td><a href="?action=delete&id={{row['cat_id']}}" class="btn btn-danger">Delete</a></td>
+				<td><a href="?action=update&id={{row['cat_id']}}" class="btn btn-info">Update</a></td>
+				<td><a href="?action=stock&id={{row['cat_id']}}" class="btn btn-info">Manage Stock</a></td>
+				
+			{% endfor %}
+			
+		</table>
+		{% endif %}
+		
+	</form>
+
+</body>
+{% endblock %}

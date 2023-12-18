@@ -1,0 +1,22 @@
+{% extends 'customer_index.html' %}
+{% block body %}
+<body>
+	<form method="post">
+		<table align="center" class="table">
+			<h1 align="center">Book Service</h1>
+			<tr>
+				<th>Service</th>
+				<td><select name="service_id" class="form-control" required="">
+					{% for row in data['service'] %}
+					<option value="{{row['service_id']}}">{{row['service_type']}}</option>
+					{% endfor %}
+				</select></td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center"><input type="submit" name="submit" value="submit" class="btn btn-info"></td>
+			</tr>
+		</table>
+	</form>
+
+</body>
+{% endblock %}

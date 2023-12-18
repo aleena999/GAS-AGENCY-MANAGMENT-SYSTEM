@@ -1,0 +1,33 @@
+{% extends 'admin_index.html' %}
+{% block body %}
+<body>
+	<form method="post">
+		<h1 align="center">STAFF REPORT</h1>
+		<table align="center" class="table" style="width:1300px; box-shadow: inset 0 0 0 200px rgba(0,0,0,0.5)">
+			<tr>
+				<th>Name</th> 
+				<th>Username</th>
+				<th>Address</th>
+				<th>Phone Number</th>
+				<th>Designation</th>
+				<th>Date of birth</th>
+				<th>Date of Joining</th>
+				<th>Status</th>
+			</tr>
+			{% for row in data['staff_report'] %}
+			<tr>
+				<td>{{row['staff_fname']}} {{row['staff_lname']}}</td>
+				<td>{{row['username']}}</td>
+				<td>{{row['staff_hname']}}, {{row['staff_city']}}, {{row['staff_district']}}</td>
+				<td>{{row['staff_phno']}}</td>
+				<td>{{row['staff_des']}}</td>
+				<td>{{row['staff_dob']}}</td>
+				<td>{{row['staff_doj']}}</td>
+				<td>{{row['s_status']}}</td>
+			</tr>
+			{% endfor %}
+		</table>
+	</form>
+
+</body>
+{% endblock %}

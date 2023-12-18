@@ -1,0 +1,63 @@
+{% extends 'staff_index.html' %}
+{% block body %}
+<body>
+	<form method="post">
+		{% if data['updater'] %}
+		<table align="center" class="table" style="width: 500px;">
+			<h1 align="center">Update Service</h1>
+			<tr>
+				<th>Service Type</th>
+				<td>{{data['updater'][0]['service_type']}}</td>
+			</tr>
+			<tr>
+				<th>Charge</th>
+				<td><input type="text" name="price" value="{{data['updater'][0]['charge']}}"></td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center"><input type="submit" name="update" value="update" class="btn btn-info"></td>
+			</tr>
+		</table>
+		{% else %}
+		
+
+		
+		<table align="center" class="table" style="width: 500px;">
+			<h1 align="center">Add Service Type</h1>
+			<tr>
+				<th>Service Type</th>
+				<td><input type="text" name="service" class="form-control" required=""></td>
+			</tr>
+			<tr>
+			<th>Charge</th>
+				<td><input type="number" name="price" class="form-control" required=""></td>
+			</tr>
+			
+			<tr>
+				<td colspan="2" align="center"><input type="submit" name="submit" value="submit" class="btn btn-success"></td>
+			</tr>
+		</table>
+		{% endif %}
+		
+		<table align="center" class="table" style="width: 500px;">
+			<h1 align="center">Services</h1>
+			<tr>
+				<th>Service Type</th>
+				<th>Charge</th>
+				
+			</tr>
+			{% for row in data['service'] %}
+			<tr>
+				<td>{{row['service_type']}}</td>
+				<td>{{row['charge']}}</td>
+				
+				<td><a href="?action=delete&id={{row['service_id']}}" class="btn btn-danger">Delete</a></td>
+				<td><a href="?action=update&id={{row['service_id']}}" class="btn btn-info">Update</a></td>
+				
+			{% endfor %}
+			
+		</table>
+		
+	</form>
+
+</body>
+{% endblock %}

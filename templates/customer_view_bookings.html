@@ -1,0 +1,24 @@
+{% extends 'customer_index.html' %}
+{% block body %}
+<body>
+	<form method="post">
+		<table align="center" class="table">
+			<h1 align="center">Bookings</h1>
+			<tr>
+				<th>Booking Date</th>
+				<th>Status</th>
+			</tr>
+			{% for row in data['bookings'] %}
+			<tr>
+				<td>{{row['date']}}</td>
+				<td>{{row['status']}}</td>
+				{% if row['status']=="approved" %}
+				<td><a href="?action=payment&id={{row['book_id']}}" class="btn btn-info">Make Payment</a></td>
+				{% endif %}
+			</tr>
+			{% endfor  %}
+		</table>
+	</form>
+
+</body>
+{% endblock %}

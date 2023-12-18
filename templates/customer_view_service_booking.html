@@ -1,0 +1,26 @@
+{% extends 'customer_index.html' %}
+{% block body %}
+<body>
+	<table align="center" class="table">
+		<h1 align="center">Service Bookings</h1>
+		<tr>
+			<th>Service Booked</th>
+			<th>Date</th>
+			<th>Charge</th>
+			<th>Remarks</th>
+		</tr>
+		{% for row in data['service_book'] %}
+		<tr>
+			<td>{{row['service_type']}}</td>
+			<td>{{row['request_date']}}</td>
+			<td>{{row['charge']}}</td>
+			<td>{{row['remarks']}}</td>
+			{% if row['remarks']=="accepted" %}
+			<td><a href="?action=payment&id={{row['service_book_id']}}" class="btn btn-info">Make Payment</a></td>
+			{% endif %}
+		</tr>
+		{% endfor %}
+	</table>
+
+</body>
+{% endblock %}

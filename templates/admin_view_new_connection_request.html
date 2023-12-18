@@ -1,0 +1,40 @@
+{% extends 'admin_index.html' %}
+{% block body %}
+<body>
+	<center>
+		<form method="post">
+			<h1 align="center">NEW CONNECTION REQUEST</h1>
+		<table class="table" align="center">
+			<tr>
+				<th>Name</th>
+				<th>Address</th>
+				<th>Phone</th>
+				<th>Proof Of Address</th>
+				<th>Proof of Identity</th>
+				<th>Cylinder Category</th>
+				<th>Connection Type</th>
+				
+
+			</tr>
+			{% for row in data['users'] %}
+				<tr>
+					<td>{{row['cus_fname']}} {{row['cus_lname']}}</td>
+					<td>{{row['cus_hname']}}, {{row['cus_city']}}, {{row['cus_district']}}, {{row['cus_state']}}, {{row['pincode']}}</td>
+					<td>{{row['cus_phno']}}</td>
+					<td><img src="/{{row['proof_of_address']}}" width="180" height="180"></td>
+					<td><img src="/{{row['proof_of_identity']}}" width="180" height="180"></td>
+					<td>{{row['cat_weight']}}</td>
+					<td>{{row['connection_type']}}</td>
+					<td><a href="?action=accept&id={{row['username']}}" class="btn btn-success">Accept</a></td>
+					<td><a href="?action=reject&id={{row['username']}}" class="btn btn-danger">Reject</a></td>
+				
+
+					
+				</tr>
+			{% endfor %}
+		</table>
+		</form>
+</center>
+
+</body>
+{% endblock %}

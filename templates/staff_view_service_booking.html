@@ -1,0 +1,77 @@
+{% extends 'staff_index.html' %}
+{% block body %}
+<body>
+	<center>
+		<form method="post">
+			{% if data['ser'] %}
+			<table class="table" align="center">
+				<h1 align="center">Add Remark</h1>
+				<tr>
+					<th>Customer Name</th>
+					<td>{{data['ser'][0]['cus_fname']}}{{data['ser'][0]['cus_lname']}}</td>
+				</tr>
+				<tr>
+					<th>Service Booked</th>
+					<td>{{data['ser'][0]['service_type']}}</td>
+				</tr>
+				<tr>
+					<th>Remark</th>
+					<td><input type="text" name="remarks" class="form-control" required=""></td>
+				</tr>
+				<tr>
+					<td colspan="2" align="center"><input type="submit" name="submit" value="submit" class="form-control"></td>
+				</tr>
+			</table>
+			{% endif %}
+
+			{% if data['payment'] %}
+			<h1 align="center">Payment</h1>
+			<table align="center" class="table" style="width: 500px;">
+				<tr>
+					<th>Amount</th>
+					<td>{{data['payment'][0]['amount']}}</td>
+				</tr>
+				<tr>
+					<th>Date</th>
+					<td>{{data['payment'][0]['date']}}</td>
+				</tr>
+			</table>
+			{% endif %}
+			<h1 align="center">SERVICE BOOKINGS</h1>
+			
+		<table class="table" align="center">
+			<tr>
+				<th>Name</th>
+				<th>Address</th>
+				<th>Phone</th>
+				<th>Service Booked</th>
+				<th>Booking Date</th>
+				<th>Remarks</th>		
+			</tr>
+			{% for row in data['services'] %}
+				<tr>
+					<td>{{row['cus_fname']}} {{row['cus_lname']}}</td>
+					<td>{{row['cus_hname']}}, {{row['cus_city']}}, {{row['pincode']}}</td>
+					<td>{{row['cus_phno']}}</td>
+					<td>{{row['service_type']}}</td>
+					<td>{{row['request_date']}}</td>
+					<td>{{row['remarks']}}</td>
+					{% if row['remarks']=='paid' %}
+					<td><a href="?action=payment&id={{row['service_book_id']}}" class="btn btn-info">Payment</a></td>
+					{% endif %}
+					{% if row['remarks']=='pending' %}
+					<td><a href="?action=accept&id={{row['service_book_id']}}" class="btn btn-info">Accept</a></td>
+					<td><a href="?action=reject&id={{row['service_book_id']}}" class="btn btn-danger">Reject</a></td>
+					{% endif %}
+		
+				
+
+					
+				</tr>
+			{% endfor %}
+		</table>
+		</form>
+</center>
+
+</body>
+{% endblock %}

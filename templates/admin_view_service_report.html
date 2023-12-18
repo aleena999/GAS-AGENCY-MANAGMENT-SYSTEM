@@ -1,0 +1,33 @@
+{% extends 'admin_index.html' %}
+{% block body %}
+<body>
+	<form method="post">
+		<table align="left" class="table" style="width:1300px;box-shadow: inset 0 0 0 200px rgba(0,0,0,0.5)">
+			<h1 align="center">SERVICE REPORT</h1>
+			<tr>
+				<th>Customer Name</th>
+				<th>Cylinder Category</th>
+				<th>Connection Type</th>
+				<th>Service Booked</th>
+				<th>Service Charge</th>
+				<th>Booked Date</th>
+				<th>Serviced By</th>
+				<th>Service Remark</th>
+			</tr>
+			{% for row in data['service_report'] %}
+			<tr>
+				<td>{{row['cus_fname']}}  {{row['cus_lname']}}</td>
+				<td>{{row['cat_weight']}}</td>
+				<td>{{row['connection_type']}}</td>
+				<td>{{row['service_type']}}</td>
+				<td>{{row['charge']}}</td>
+				<td>{{row['request_date']}}</td>
+				<td>{{row['staff_fname']}}{{row['staff_lname']}}</td>
+				<td>{{row['service_remarks']}}</td>
+			</tr>
+			{% endfor %}
+		</table>
+	</form>
+
+</body>
+{% endblock %}

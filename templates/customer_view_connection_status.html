@@ -1,0 +1,47 @@
+{% extends 'customer_index.html' %}
+{% block body %}
+<body>
+	<form method="post">
+		<table align="center" class="table">
+			<h1 align="center">CONNECTON DETAILS</h1>
+			<tr>
+				<th>Name</th>
+				<td>{{data['profile'][0]['cus_fname']}}  {{data['profile'][0]['cus_lname']}}</td>
+			</tr>
+			<tr>
+				<th>Username</th>
+				<td>{{data['profile'][0]['username']}}</td>
+			</tr>
+			<tr>
+				<th>Adhaar Number</th>
+				<td>{{data['profile'][0]['adhaar_no']}}</td>
+			</tr>
+				<tr>
+				<th>Address</th>
+				<td>{{data['profile'][0]['cus_hname']}}, {{data['profile'][0]['cus_city']}}, {{data['profile'][0]['cus_district']}}, {{data['profile'][0]['cus_state']}}, {{data['profile'][0]['pincode']}} </td>
+			</tr>
+			<tr>
+				<th>Registered phone number</th>
+				<td>{{data['profile'][0]['cus_phno']}}</td>
+			</tr>
+			<tr>
+				<th>Connection Type</th>
+				<td>{{data['profile'][0]['connection_type']}}</td>
+			</tr>
+			<tr>
+				<th>Cylinder Category</th>
+				<td>{{data['profile'][0]['cat_weight']}}</td>
+			</tr>
+			<tr>
+				<th>Connection Status</th>
+				<td>{{data['profile'][0]['c_status']}}</td>
+			</tr>
+			<tr>
+				<th>Installation Status</th>
+				<td>{{data['profile'][0]['install_status']}}</td>
+			</tr>
+		</table>
+	</form>
+
+</body>
+{% endblock %}

@@ -1,0 +1,110 @@
+{% extends 'admin_index.html' %}
+{% block body %}
+<body>
+	<center>
+		<form method="post">
+			{% if data['vehicles'] %}
+			<table align="center" class="table" style="width:500px;box-shadow: inset 0 0 0 200px rgba(0,0,0,0.5)">
+				<h1 align="center">ARRANGE DELIVERY</h1>
+				<tr>
+					<th>Customer </th>
+					<td>{{data['book'][0]['cus_fname']}} {{data['booking'][0]['cus_lname']}}</td>
+				</tr>
+				<tr>
+					<th>Address</th>
+					<td>{{data['book'][0]['cus_hname']}}, {{data['book'][0]['cus_city']}}, 	{{data['book'][0]['cus_district']}}, {{data['book'][0]['cus_state']}}, 
+					{{data['book'][0]['pincode']}}</td>
+				</tr>
+				<tr>
+					<th>Phone</th>
+					<td>{{data['book'][0]['cus_phno']}}</td>
+				</tr>
+				<tr>
+					<th>Vehicle</th>
+					<td>
+						<select name="vehicle_id" style="width: 150px">
+							{% for row in data['vehicles'] %}
+							<option value="{{row['vehicle_regno']}}">{{row['vehicle_regno']}}</option>
+							{% endfor %}
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<th>Staff</th>
+					<td>
+						<select name="staff_id" style="width: 150px">
+							{% for row in data['staff'] %}
+							<option value="{{row['staff_id']}}">{{row['staff_fname']}} {{row['staff_lname']}}</option>
+							{% endfor %}
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2" align="center"><input type="submit" name="submit" value="Submit" class="btn btn-info"></td>
+				</tr>
+			</table>
+
+			{% endif %}
+			
+			{% if data['payment'] %}
+			<h1 align="center">PAYMENT DETAILS</h1>
+			<table align="center" class="table" style="width:200px;box-shadow: inset 0 0 0 200px rgba(0,0,0,0.5)">
+				<tr>
+					<th>Amount</th>
+					<td>{{data['payment'][0]['amount']}}</td>
+				</tr>
+				<tr>
+					<th>Date</th>
+					<td>{{data['payment'][0]['date']}}</td>
+				</tr>
+			</table>
+			{% endif %}
+			 <br> <br>
+			<h1 align="center">CYLINDER BOOKING</h1>
+			
+		<table class="table" align="center" style="width:1300px;box-shadow: inset 0 0 0 200px rgba(0,0,0,0.5)">
+			<tr><th>Name</th>
+				<th>Address</th>
+				<th>Phone</th>
+				<th>Cylinder Category</th>
+				<!-- <th>Connection Type</th> -->
+				<th>Booking Date</th>
+				<th>Status</th>
+
+				
+
+			</tr>
+			{% for row in data['booking'] %}
+				<tr>
+					<td>{{row['cus_fname']}} {{row['cus_lname']}}</td>
+					<td>{{row['cus_hname']}}, {{row['cus_city']}}, {{row['pincode']}}</td>
+					<td>{{row['cus_phno']}}</td>
+		
+					<td>{{row['cat_weight']}}</td>
+					<!-- <td>{{row['connection_type']}}</td> -->
+					<td>{{row['date']}}</td>
+					<td>{{row['status']}}</td>
+					{% if row['status']=='paid' %}
+					<td><a href="?action=payment&id={{row['book_id']}}" class="btn btn-info">Payment</a></td>
+					{% endif %}
+					{% if row['status']=='pending' %}
+					<td><a href="?action=accept&id={{row['book_id']}}" class="btn btn-info">Accept</a></td>
+					<td><a href="?action=reject&id={{row['book_id']}}" class="btn btn-danger">Reject</a></td>
+					{% endif %}
+					{% if row['status']=="paid" %}
+					<td><a href="?action=assign&id={{row['book_id']}}" class="btn btn-success">Assign</a></td>
+					{% endif %}
+					{% if row['status']=="vehicle_assigned" %}
+					<td><a href="?action=deliver&id={{row['book_id']}}" class="btn btn-success">Delivered</a></td>
+					{% endif %}
+					{% if row['status']=='DELIVERED' %}
+					<td><a href="?action=payment&id={{row['book_id']}}" class="btn btn-info">Payment Details</a></td>
+					{% endif %}
+
+					
+				</tr>
+			{% endfor %}
+		</table>
+		</form>
+</center>
+{% endblock %}
